@@ -1,0 +1,52 @@
+{
+  "requestsFinished": 1,
+  "requestsFailed": 1,
+  "requestsRetries": 1,
+  "requestsFailedPerMinute": 0,
+  "requestsFinishedPerMinute": 0,
+  "requestMinDurationMillis": 8967,
+  "requestMaxDurationMillis": 8967,
+  "requestTotalFailedDurationMillis": 33229,
+  "requestTotalFinishedDurationMillis": 8967,
+  "crawlerStartedAt": "2025-05-31T12:49:22.521Z",
+  "crawlerFinishedAt": "2025-05-31T12:53:10.795Z",
+  "statsPersistedAt": "2025-05-31T12:53:10.795Z",
+  "crawlerRuntimeMillis": 228464,
+  "crawlerLastStartTimestamp": 1748695762331,
+  "requestRetryHistogram": [
+    1,
+    null,
+    null,
+    1
+  ],
+  "statsId": 0,
+  "requestAvgFailedDurationMillis": 33229,
+  "requestAvgFinishedDurationMillis": 8967,
+  "requestTotalDurationMillis": 42196,
+  "requestsTotal": 2,
+  "requestsWithStatusCode": {
+    "200": 5
+  },
+  "errors": {
+    "C:\\apify projects\\instagram autounfollw salim\\main.js:69:9": {
+      "missing error code": {
+        "TimeoutError": {
+          "Waiting for selector `a[href*=\"/following\"]` failed: Waiting failed: 30000ms exceeded": {
+            "count": 1
+          }
+        }
+      }
+    }
+  },
+  "retryErrors": {
+    "C:\\apify projects\\instagram autounfollw salim\\node_modules\\@apify\\timeout\\cjs\\index.cjs:64:68": {
+      "missing error code": {
+        "Error": {
+          "requestHandler timed out after 60 seconds.": {
+            "count": 3
+          }
+        }
+      }
+    }
+  }
+}
