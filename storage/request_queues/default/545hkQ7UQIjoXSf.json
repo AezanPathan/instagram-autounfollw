@@ -1,9 +1,0 @@
-{
-	"id": "545hkQ7UQIjoXSf",
-	"json": "{\"id\":\"545hkQ7UQIjoXSf\",\"url\":\"https://www.instagram.com/accounts/login/\",\"loadedUrl\":\"https://www.instagram.com/accounts/login/\",\"uniqueKey\":\"https://www.instagram.com/accounts/login\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"LOGIN\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-05-31T12:49:31.825Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://www.instagram.com/accounts/login",
-	"url": "https://www.instagram.com/accounts/login/"
-}
