@@ -4,24 +4,6 @@
 
 A minimal Instagram unfollow automation built with Node.js, Puppeteer (via Crawlee), and a simple configuration-first design. Credentials live in a .env file and all page selectors are centralized in a JSON file so you can tweak them without changing code.
 
----
-
-## ⚙️ Features
-
-- 🔐 Credentials from .env (no hardcoding)
-- 🧩 All CSS selectors in `src/config/selectors.json`
-- 🍪 Cookie persistence to skip repeated logins
-- ⏱️ Configurable unfollow count and delays via env
-- 🧭 Clear logs for each automation step
-
----
-
-## 🧰 Tech Stack
-
-- Node.js + npm
-- Crawlee (Puppeteer under the hood)
-
----
 
 ## 📦 Getting Started
 
@@ -37,55 +19,23 @@ npm install
 Copy-Item .env.example .env
 
 # Edit .env and set credentials
-#   INSTAGRAM_USERNAME=your_username
-#   INSTAGRAM_PASSWORD=your_password
+#   INSTAGRAM_USERNAME=your_username  # Your Instagram username
+#   INSTAGRAM_PASSWORD=your_password  # Your Instagram password
 # Optional tuning
-#   MAX_UNFOLLOW_COUNT=100
-#   UNFOLLOW_DELAY=5000
-#   SCROLL_DELAY=3000
+#   MAX_UNFOLLOW_COUNT=100   # Limit how many to unfollow per run 
+#   UNFOLLOW_DELAY=5000  # Delay between unfollows in ms (default 5000)
+#   SCROLL_DELAY=3000  # Delay after scrolling in ms (default 3000)
 
 # Run
 npm start
 ```
 
----
-
-## 🔧 Configuration
-
-- Environment variables: `.env`
-	- `INSTAGRAM_USERNAME` – Your Instagram username
-	- `INSTAGRAM_PASSWORD` – Your Instagram password
-	- `MAX_UNFOLLOW_COUNT` – Limit how many to unfollow per run (default 100)
-	- `UNFOLLOW_DELAY` – Delay between unfollows in ms (default 5000)
-	- `SCROLL_DELAY` – Delay after scrolling in ms (default 3000)
-
-- Selectors: `src/config/selectors.json`
-	- Centralizes all DOM selectors (login inputs, following dialog, confirm button, etc.).
-	- If Instagram changes their HTML, update them here without touching code.
-
----
-
-## 📁 Project Structure
-
-```
-instagram-autounfollw/
-├─ assets/
-│  └─ demo.gif                 # Place your GIF here (update README path if you rename it)
-├─ src/
-│  ├─ config/
-│  │  └─ selectors.json        # All page selectors
-│  └─ main.js                  # Entry point
-├─ .env.example                # Copy to .env and fill in credentials
-├─ package.json                # npm scripts and deps
-└─ README.md                   # You are here
-```
-
----
-
 ## 📝 Notes
 
-- This tool automates actions on Instagram UI. Use responsibly and at your own risk. Instagram may throttle, block, or change selectors at any time.
-- If login fails, delete `cookies.json` and try again.
+- This tool automates actions on Instagram UI.It intentionally operates at a human-like pace to reduce the risk of Instagram detecting or blocking automated behavior.
+
+- If login fails, delete the cookies.json file and try again — this resets your session.
+
 - Run with headful browser by default; you can set headless if you prefer inside `src/main.js` launch options.
 
 ---
