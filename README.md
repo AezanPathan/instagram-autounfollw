@@ -9,7 +9,7 @@ A minimal Instagram unfollow automation built with Node.js, Puppeteer (via Crawl
 
 ```powershell
 # Clone your fork
-git clone https://github.com/AezanPathan/instagram-autounfollw.git
+git clone https://github.com/salimuddin07/instagram-autounfollw.git
 cd instagram-autounfollw
 
 # Install dependencies
@@ -44,4 +44,7 @@ npm start
 
 If this saved you time, you can support here:
 
-<p><a href="https://www.buymeacoffee.com/aezan"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="Buy Me A Coffee" /></a></p>
+
+<p><a href="https://www.buymeacoffee.com/salimuddin07"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="Buy Me A Coffee" /></a></p>
+
+
