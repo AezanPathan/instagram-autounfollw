@@ -22,18 +22,11 @@ if (!INSTAGRAM_USERNAME || !INSTAGRAM_PASSWORD) {
 const LOGIN_URL = "https://www.instagram.com/accounts/login/";
 const FOLLOWING_URL = `https://www.instagram.com/${INSTAGRAM_USERNAME}/following/`;
 const COOKIE_PATH = path.resolve(__dirname, "..", "cookies.json");
-const SELECTORS_PATH = path.resolve(__dirname, "config", "selectors.json");
 
 // Load selectors from JSON
-let selectors = {};
-try {
-  selectors = JSON.parse(fs.readFileSync(SELECTORS_PATH, "utf-8"));
-} catch (e) {
-  log.error(`Failed to read selectors file at ${SELECTORS_PATH}: ${e.message}`);
-  process.exit(1);
-}
+const selectors = require("./config/selectors");
 
-// Minimal validation of required selector keys
+// Validate selectors
 const has = (obj, pathStr) => pathStr.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj) !== undefined;
 const requiredSelectorKeys = [
   "login.usernameInput",
@@ -47,7 +40,7 @@ const requiredSelectorKeys = [
 ];
 const missing = requiredSelectorKeys.filter(k => !has(selectors, k));
 if (missing.length) {
-  log.error(`Missing selectors in selectors.json: ${missing.join(", ")}`);
+  log.error(`Missing selectors in selectors.js: ${missing.join(", ")}`);
   process.exit(1);
 }
 
@@ -118,10 +111,10 @@ const saveCookies = async (page) => {
       if (request.userData.label === "UNFOLLOW") {
         log.info("🚀 Starting unfollow process...");
 
-  await page.waitForSelector(selectors.following.link, { visible: true });
-  await page.click(selectors.following.link);
+        await page.waitForSelector(selectors.following.link, { visible: true });
+        await page.click(selectors.following.link);
 
-  await page.waitForSelector(selectors.following.dialog, { visible: true });
+        await page.waitForSelector(selectors.following.dialog, { visible: true });
 
         let unfollowedCount = 0;
         const unfollowedUsers = new Set();
@@ -183,30 +176,34 @@ const saveCookies = async (page) => {
             log.info("📜 Scrolling to load more users...");
             await page.evaluate((dialogSelector) => {
               const dialog = document.querySelector(dialogSelector);
-              if (dialog) dialog.scrollBy(0, 400);
+              if (dialog) {
+                dialog.scrollTop = dialog.scrollHeight;
+              }
             }, selectors.following.dialogScrollable);
 
             await new Promise(res => setTimeout(res, SCROLL_DELAY));
-          } catch (error) {
-            log.error("❌ Error during unfollow loop: " + error.message);
+          } catch (err) {
+            log.error("Error in unfollow loop: " + err.message);
             break;
           }
         }
 
-        log.info(`✅ Finished! Total unfollowed: ${unfollowedCount}`);
+        log.info("✅ Unfollow process completed.");
       }
     },
 
-    failedRequestHandler: async ({ request, error }) => {
-      log.error(`Request ${request.url} failed: ${error.message}`);
+    // Error handler
+    failedRequestHandler: async ({ request }) => {
+      log.error(`Request ${request.url} failed. Giving up.`);
     },
   });
 
-  // Add tasks
-  await crawler.addRequests([
-    { url: LOGIN_URL, userData: { label: "LOGIN" } },
-    { url: FOLLOWING_URL, userData: { label: "UNFOLLOW" } },
-  ]);
+  // Add initial request for login
+  crawler.addRequest({
+    url: LOGIN_URL,
+    userData: { label: "LOGIN" },
+  });
 
+  // Start the crawler
   await crawler.run();
 })();
