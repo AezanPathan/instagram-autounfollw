@@ -1,4 +1,4 @@
-![Instagram Auto-Unfollow Demo](./assets/demo.gif)
+![Instagram Auto-Unfollow Demo](./assets/bluetonedievories.gif)
 
 # 🚀 Instagram Auto-Unfollow
 
