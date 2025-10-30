@@ -199,10 +199,10 @@ const saveCookies = async (page) => {
   });
 
   // Add initial request for login
-  crawler.addRequest({
-    url: LOGIN_URL,
-    userData: { label: "LOGIN" },
-  });
+  crawler.addRequests([
+    { url: LOGIN_URL, userData: { label: "LOGIN" } },
+    { url: FOLLOWING_URL, userData: { label: "UNFOLLOW" } },
+  ]);
 
   // Start the crawler
   await crawler.run();
